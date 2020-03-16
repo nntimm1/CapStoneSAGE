@@ -1,0 +1,40 @@
+﻿
+
+<div id="after_submit"></div>
+<br>
+<br>
+<h1>Contact Us</h1>
+<h4>Have a question? Just need some general help? Let us know.</h4>
+<h4>All messages are replied to within 24 hours.</h4>
+<br />
+<h4>For immediate assistance please call 1-888-867-5309.</h4>
+<br>
+<br>
+<center>
+    <form id="contact_form" action="#" method="POST" enctype="multipart/form-data">
+        <br><br>
+        <div class="row">
+            <label class="required" for="name">Your name:</label><br />
+            <input id="name" class="input" name="name" type="text" value="" size="30" /><br>
+            <span id="name_validation" class="error_message"></span>
+        </div>
+        <br><br>
+        <div class="row">
+            <label class="required" for="email">Your email:</label><br />
+            <input id="email" class="input" name="email" type="text" value="" size="30" /><br>
+            <span id="email_validation" class="error_message"></span>
+        </div>
+        <br><br>
+
+        <div class="row">
+            <label class="required" for="message">Message:</label><br>
+            <textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
+            <span id="message_validation" class="error_message"></span>
+        </div>
+
+        <br />
+        <input id="submit_button" type="submit" value="Send email" />
+
+    </form>
+</center>
+
