@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SAGEWebsite.Data;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Web.Helpers;
 
 [assembly: HostingStartup(typeof(SAGEWebsite.Areas.Identity.IdentityHostingStartup))]
 namespace SAGEWebsite.Areas.Identity
