@@ -1,0 +1,67 @@
+﻿@model SAGEWebsite.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CustomerId" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EmailOptIn" /> @Html.DisplayNameFor(model => model.EmailOptIn)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentId" class="control-label"></label>
+                <select asp-for="PaymentId" class="form-control" asp-items="ViewBag.PaymentId"></select>
+                <span asp-validation-for="PaymentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurveyId" class="control-label"></label>
+                <select asp-for="SurveyId" class="form-control" asp-items="ViewBag.SurveyId"></select>
+                <span asp-validation-for="SurveyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddressId" class="control-label"></label>
+                <select asp-for="ShippingAddressId" class="form-control" asp-items="ViewBag.ShippingAddressId"></select>
+                <span asp-validation-for="ShippingAddressId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingAddressId" class="control-label"></label>
+                <select asp-for="BillingAddressId" class="form-control" asp-items="ViewBag.BillingAddressId"></select>
+                <span asp-validation-for="BillingAddressId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

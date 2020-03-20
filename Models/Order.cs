@@ -22,13 +22,13 @@ namespace SAGEWebsite.Models
         public Item Item { get; set; }
         public IEnumerable<Item> Items { get; set; }
 
-
         [Display(Name = "Customer Id")]
         [ForeignKey("Customer")]
 
         public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
         public IEnumerable<Customer> Customers { get; set; }
+
 
 
     }

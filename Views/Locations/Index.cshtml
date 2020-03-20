@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SAGEWebsite.Models.Location>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Locations</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationMap)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationMap)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.LocationId">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

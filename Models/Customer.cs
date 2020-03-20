@@ -19,7 +19,7 @@ namespace SAGEWebsite.Models
         [Display(Name = "Payment Method")]
         [ForeignKey("Payment")]
 
-        public int? PaymentId { get; set; }
+        public ulong? PaymentId { get; set; }
         public Payment Payment { get; set; }
 
         public IEnumerable<Payment> Payments { get; set; }
@@ -44,11 +44,5 @@ namespace SAGEWebsite.Models
         public int? BillingAddressId { get; set; }
         public Address BillingAddress { get; set; }
 
-        [Display(Name = "Order Number")]
-        [ForeignKey("Order")]
-        public int? OrderId { get; set; }
-        public Order Order { get; set; }
-        [NotMapped]
-        public IEnumerable<Order> Orders { get; set; }
     }
 }

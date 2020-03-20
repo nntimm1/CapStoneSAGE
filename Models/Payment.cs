@@ -9,7 +9,7 @@ namespace SAGEWebsite.Models
     public class Payment
     {
         [Key]
-        public ulong CreditCardNumber { get; set; }
+        public ulong? CreditCardNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ExpirationDate { get; set; }
