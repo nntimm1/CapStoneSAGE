@@ -36,6 +36,18 @@ namespace SAGEWebsite.Controllers
         {
             return View();
         }
+        public IActionResult Product()
+        {
+            return View();
+        }
+        public IActionResult Locations()
+        {
+            return View();
+        }
+        public IActionResult Enviornmental()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

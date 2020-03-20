@@ -52,49 +52,44 @@ button.accept-policy {
     font-size: 1rem;
     line-height: inherit;
 }
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
+/* Slideshow container */
+.slideshow-container {
+    max-width: 7000px;
     position: relative;
-    min-height: 100%;
+    margin: auto;
 }
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Verdana, sans-serif;
-}
-
+/* Hide the images by default */
 .mySlides {
     display: none;
 }
 
-img {
-    vertical-align: middle;
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
-/* Slideshow container */
-.slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
 
 /* Caption text */
 .text {
@@ -118,25 +113,26 @@ img {
 
 /* The dots/bullets/indicators */
 .dot {
+    cursor: pointer;
     height: 15px;
     width: 15px;
     margin: 0 2px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    transition: background-color 0.6s ease;
+    transition: background-color 5s ease;
 }
 
-.active {
-    background-color: #717171;
-}
+    .active, .dot:hover {
+        background-color: #717171;
+    }
 
 /* Fading animation */
 .fade {
     -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
+    -webkit-animation-duration: 10s;
     animation-name: fade;
-    animation-duration: 1.5s;
+    animation-duration: 10s;
 }
 
 @-webkit-keyframes fade {
@@ -157,35 +153,4 @@ img {
     to {
         opacity: 1
     }
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-    .text {
-        font-size: 11px
-    }
-}
-
-label {
-    font-weight: bold;
-    font-size: 16px;
-}
-
-#submit_button {
-    background-color: #B22222;
-    height: 30px;
-    width: 20%;
-    color: #FFFFFF;
-    font-weight: bold;
-}
-
-input, textarea {
-    background-color: #D3D3D3;
-    color: #2F4F4F;
-    width: 250px;
-    margin-bottom: 10px;
-    box-shadow: 5px 5px 2px 2px #696969;
-}
-.h3{
-    align-content: center;
 }
