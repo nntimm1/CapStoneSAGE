@@ -10,12 +10,14 @@ namespace SAGEWebsite.Models
     {
         [Key]
         public int LocationId {get;set;}
+        [Display(Name = "Location Name")]
         public string LocationName { get; set; }
+        [Display(Name = "Address")]
 
         public string LocationAddress { get; set; }
-
+        [Display(Name = "Hours")]
         public string LocationHours { get; set; }
-
+        [Display(Name = "Location Map")]
         public string LocationMap { get; set; }
 
     }

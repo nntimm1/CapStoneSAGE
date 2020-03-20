@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SAGEWebsite.Models.Item>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Available Products for Order</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StyleType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LifeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AutoReorder)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StyleType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LifeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoReorder)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
