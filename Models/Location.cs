@@ -19,6 +19,7 @@ namespace SAGEWebsite.Models
         public string LocationHours { get; set; }
         [Display(Name = "Location Map")]
         public string LocationMap { get; set; }
+        public string LocationDirections { get; set; }
 
     }
 }

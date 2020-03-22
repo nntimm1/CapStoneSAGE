@@ -5,17 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Locations</h1>
-<h4>Current locations selling Sage products.</h4>
+<h4>Products of Sage are avaialble at these locations. <br /> The deatils link will provide futher information about the location.</h4>
 
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.LocationName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationAddress)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LocationHours)
@@ -27,24 +23,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.LocationName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LocationAddress)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.LocationHours)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LocationMap)
+                <img src="@Url.Content(item.LocationMap)" />
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.LocationId">Details</a> 
+                <a asp-action="Details" asp-route-id="@item.LocationId">Details</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

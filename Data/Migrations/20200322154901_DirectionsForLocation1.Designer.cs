@@ -10,8 +10,8 @@ using SAGEWebsite.Data;
 namespace SAGEWebsite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200320135448_Initial")]
-    partial class Initial
+    [Migration("20200322154901_DirectionsForLocation1")]
+    partial class DirectionsForLocation1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -348,6 +348,9 @@ namespace SAGEWebsite.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("LocationAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationDirections")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocationHours")

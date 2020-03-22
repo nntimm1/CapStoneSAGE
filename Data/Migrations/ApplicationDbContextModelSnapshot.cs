@@ -348,6 +348,9 @@ namespace SAGEWebsite.Data.Migrations
                     b.Property<string>("LocationAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LocationDirections")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LocationHours")
                         .HasColumnType("nvarchar(max)");
 
