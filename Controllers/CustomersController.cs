@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ using SAGEWebsite.Models;
 
 namespace SAGEWebsite.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,30 +25,31 @@ namespace SAGEWebsite.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.BillingAddress).Include(c => c.Payment).Include(c => c.ShippingAddress).Include(c => c.Survey);
+            var applicationDbContext = _context.Customers.Include(c => c.CustomerId).Include(c => c.BillingAddress).Include(c => c.Payment).Include(c => c.ShippingAddress).Include(c => c.Survey);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToPage("Login");
             }
-
-            var customer = await _context.Customers
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers
                 .Include(c => c.BillingAddress)
                 .Include(c => c.Payment)
                 .Include(c => c.ShippingAddress)
                 .Include(c => c.Survey)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+                .Where(m => m.IdentityUserId == id).FirstOrDefault();
+
             if (customer == null)
             {
-                return NotFound();
+                return RedirectToPage("Customers/Create");
             }
 
-            return View(customer);
+            return View("Details",customer);
         }
 
         // GET: Customers/Create
@@ -55,6 +59,7 @@ namespace SAGEWebsite.Controllers
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber");
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
             ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId");
+            ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "ID", "ID");
             return View();
         }
 
@@ -63,19 +68,23 @@ namespace SAGEWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,EmailAddress,EmailOptIn,PaymentId,SurveyId,ShippingAddressId,BillingAddressId")] Customer customer)
+        public async Task<IActionResult> Create(Customer customer)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+
                 _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.SaveChangesAsync();
+                return View("Details",customer);
             }
             ViewData["BillingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.BillingAddressId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber", customer.PaymentId);
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.ShippingAddressId);
             ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId", customer.SurveyId);
-            return View(customer);
+            ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "ID", "ID",customer.IdentityUser);
+            return View("Details",customer);
         }
 
         // GET: Customers/Edit/5

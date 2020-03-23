@@ -34,20 +34,60 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="PaymentId" class="control-label"></label>
-                <select asp-for="PaymentId" class ="form-control" asp-items="ViewBag.PaymentId"></select>
+                <label asp-for="BillingAddress.Address1" class="control-label"></label>
+                <input asp-for="BillingAddress.Address1" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="SurveyId" class="control-label"></label>
-                <select asp-for="SurveyId" class ="form-control" asp-items="ViewBag.SurveyId"></select>
+                <label asp-for="BillingAddress.StreetAddress2" class="control-label"></label>
+                <input asp-for="BillingAddress.StreetAddress2" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="ShippingAddressId" class="control-label"></label>
-                <select asp-for="ShippingAddressId" class ="form-control" asp-items="ViewBag.ShippingAddressId"></select>
+                <label asp-for="BillingAddress.City" class="control-label"></label>
+                <input asp-for="BillingAddress.City" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="BillingAddressId" class="control-label"></label>
-                <select asp-for="BillingAddressId" class ="form-control" asp-items="ViewBag.BillingAddressId"></select>
+                <label asp-for="BillingAddress.State" class="control-label"></label>
+                <input asp-for="BillingAddress.State" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingAddress.ZipCode" class="control-label"></label>
+                <input asp-for="BillingAddress.ZipCode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress.Address1" class="control-label"></label>
+                <input asp-for="ShippingAddress.Address1" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress.StreetAddress2" class="control-label"></label>
+                <input asp-for="ShippingAddress.StreetAddress2" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress.City" class="control-label"></label>
+                <input asp-for="ShippingAddress.City" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress.State" class="control-label"></label>
+                <input asp-for="ShippingAddress.State" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress.ZipCode" class="control-label"></label>
+                <input asp-for="ShippingAddress.ZipCode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Payment.CreditCardNumber" class="control-label"></label>
+                <input asp-for="Payment.CreditCardNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Payment.ExpirationDate" class="control-label"></label>
+                <input asp-for="Payment.ExpirationDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Payment.CVVSecurityCode" class="control-label"></label>
+                <input asp-for="Payment.CVVSecurityCode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Payment.FirstName" class="control-label"></label>
+                <input asp-for="Payment.LastName" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

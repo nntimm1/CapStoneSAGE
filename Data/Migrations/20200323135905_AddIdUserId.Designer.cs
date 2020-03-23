@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SAGEWebsite.Data;
 
 namespace SAGEWebsite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200323135905_AddIdUserId")]
+    partial class AddIdUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,15 +46,6 @@ namespace SAGEWebsite.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "705f354f-e04f-49ec-a3c4-c1585c0825ca",
-                            ConcurrencyStamp = "1eeb1450-01b7-4330-9063-f5d7419aafca",
-                            Name = "Customer",
-                            NormalizedName = "Customer"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -307,8 +300,8 @@ namespace SAGEWebsite.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityUderId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("IdenityUserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -328,8 +321,6 @@ namespace SAGEWebsite.Data.Migrations
                     b.HasKey("CustomerId");
 
                     b.HasIndex("BillingAddressId");
-
-                    b.HasIndex("IdentityUderId");
 
                     b.HasIndex("OrderNumber");
 
@@ -555,10 +546,6 @@ namespace SAGEWebsite.Data.Migrations
                     b.HasOne("SAGEWebsite.Models.Address", "BillingAddress")
                         .WithMany()
                         .HasForeignKey("BillingAddressId");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUderId");
 
                     b.HasOne("SAGEWebsite.Models.Order", null)
                         .WithMany("Customers")

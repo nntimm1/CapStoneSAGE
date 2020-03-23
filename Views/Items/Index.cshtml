@@ -28,9 +28,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.ProductType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AutoReorder)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -54,9 +51,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AutoReorder)
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> 

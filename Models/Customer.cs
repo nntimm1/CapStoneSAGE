@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -43,6 +44,10 @@ namespace SAGEWebsite.Models
         [ForeignKey("BillingAddress")]
         public int? BillingAddressId { get; set; }
         public Address BillingAddress { get; set; }
+
+        [ForeignKey("IdentityUser")]
+        public string IdentityUserId { get; set; }
+        public IdentityUser IdentityUser { get; set; }
 
     }
 }

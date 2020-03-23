@@ -10,7 +10,7 @@ namespace SAGEWebsite.Models
     {
         [Key]
         public int ItemId { get; set; }
-        [Display(Name = "")]
+        [Display(Name = "Name")]
         public string ItemName { get; set; }
         [Display(Name = "Price")]
         public double UnitPrice { get; set; }
