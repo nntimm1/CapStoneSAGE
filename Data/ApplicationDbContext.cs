@@ -12,32 +12,29 @@ namespace SAGEWebsite.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        {
-        }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Item> Items { get; set; }
-        public DbSet<Order> Orders{ get; set; }
-        public DbSet<Payment> Payments{ get; set; }
-        public DbSet<Survey> Surveys { get; set; }
+        { }
+        public DbSet<SAGEWebsite.Models.Customer> Customers { get; set; }
+        public DbSet<SAGEWebsite.Models.Location> Locations { get; set; }
+        public DbSet<SAGEWebsite.Models.Address> Addresses { get; set; }
+        public DbSet<SAGEWebsite.Models.Item> Items { get; set; }
+        public DbSet<SAGEWebsite.Models.Order> Orders { get; set; }
+        public DbSet<SAGEWebsite.Models.Payment> Payments { get; set; }
+        public DbSet<SAGEWebsite.Models.Survey> Surveys { get; set; }
         public DbSet<SAGEWebsite.Models.Contact> Contact { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    base.OnModelCreating(builder);
-
-        //    builder.Entity<IdentityRole>()
-        //        .HasData(
-        //        new IdentityRole
-        //        {
-        //            Name = "Customer",
-        //            NormalizedName = "Customer"
-        //        }
-        //    );
-        //}
-
-
-
+            builder.Entity<IdentityRole>()
+               .HasData(
+                   new IdentityRole
+                   {
+                       Name = "Customer",
+                       NormalizedName = "CUSTOMER"
+                   }
+              );
+        }
     }
-}
+ }
+
+

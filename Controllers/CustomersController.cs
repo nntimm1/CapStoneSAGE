@@ -12,7 +12,6 @@ using SAGEWebsite.Models;
 
 namespace SAGEWebsite.Controllers
 {
-    [Authorize(Roles = "Customer")]
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,28 +24,29 @@ namespace SAGEWebsite.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.CustomerId).Include(c => c.BillingAddress).Include(c => c.Payment).Include(c => c.ShippingAddress).Include(c => c.Survey);
+            var applicationDbContext = _context.Customers.Include(c => c.BillingAddress).Include(c => c.Payment).Include(c => c.ShippingAddress).Include(c => c.Survey);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(string? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
-            {
-                return RedirectToPage("Login");
-            }
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers
                 .Include(c => c.BillingAddress)
                 .Include(c => c.Payment)
                 .Include(c => c.ShippingAddress)
                 .Include(c => c.Survey)
-                .Where(m => m.IdentityUserId == id).FirstOrDefault();
+                .Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            if(userId == null)
+            {
+                return RedirectToPage("_Layout");
+            }
 
             if (customer == null)
             {
-                return RedirectToPage("Customers/Create");
+                return View("Create");
             }
 
             return View("Details",customer);
@@ -55,6 +55,7 @@ namespace SAGEWebsite.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
+
             ViewData["BillingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber");
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
@@ -76,14 +77,14 @@ namespace SAGEWebsite.Controllers
                 customer.IdentityUserId = userId;
 
                 _context.Add(customer);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return View("Details",customer);
             }
             ViewData["BillingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.BillingAddressId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber", customer.PaymentId);
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.ShippingAddressId);
             ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId", customer.SurveyId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "ID", "ID",customer.IdentityUser);
+            ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "CustomerId", "CustomerId");
             return View("Details",customer);
         }
 
