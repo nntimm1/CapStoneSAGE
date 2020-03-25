@@ -11,9 +11,15 @@ namespace SAGEWebsite.Models
         [Key]
         public int SurveyId { get; set; }
 
+        [Display(Name = "Decor Style")]
         public string StyleType { get; set; }
+
+        [Display(Name = "Home Lighting")]
         public string HomeType { get; set; }
+
+        [Display(Name = "Life Style")]
         public string LifeType { get; set; }
+
 
     }
 }

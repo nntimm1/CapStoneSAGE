@@ -9,10 +9,15 @@ namespace SAGEWebsite.Models
     public class Payment
     {
         [Key]
+        [Display(Name = "Credit Card Number")]
         public ulong? CreditCardNumber { get; set; }
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Display(Name = "Expiration Date")]
         public string ExpirationDate { get; set; }
+        [Display(Name = "CVV Code")]
         public int CVVSecurityCode { get; set; }
 
     }

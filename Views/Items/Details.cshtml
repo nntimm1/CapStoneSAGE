@@ -11,51 +11,69 @@
     <h4>Item</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ItemName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ItemName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Url.Content(Model.ItemImage)" />
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.UnitPrice)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.UnitPrice)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StyleType)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StyleType)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.HomeType)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.HomeType)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LifeType)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LifeType)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ProductType)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ProductType)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.AutoReorder)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.AutoReorder)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ItemId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <a id="btn_add" href="@Url.Action("Create", "Orders")" class="btn btn-info btn-lg" style="margin-left:60px">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+    </a>
+
+    <a id="btn_add" href="@Url.Action("Index", "Items")" class="btn btn-info btn-lg" style="margin-left:60px">
+        <span class="glyphicon glyphicon-eye-open"></span> Continue shopping
+    </a>
+    <br />
+    <br />
+
+</div>
+<div>
+    <a asp-action="Index">Back to Products</a>
 </div>

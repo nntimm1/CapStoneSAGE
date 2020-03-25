@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SAGEWebsite.Data;
 
 namespace SAGEWebsite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200324205553_ItemImages")]
+    partial class ItemImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,8 +50,8 @@ namespace SAGEWebsite.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f919a806-dec9-4fea-8b75-17ae5d3242c3",
-                            ConcurrencyStamp = "7df96d93-101f-4d0d-8d91-6eabecd7712e",
+                            Id = "ef11a973-1ac1-427b-8ac4-c2b50587b5de",
+                            ConcurrencyStamp = "5baa3a41-0f64-4f26-8284-3c22b696d0f2",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

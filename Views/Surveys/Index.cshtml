@@ -1,24 +1,18 @@
-﻿@model IEnumerable<SAGEWebsite.Models.Item>
+﻿@model IEnumerable<SAGEWebsite.Models.Survey>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Available Products for Order</h1>
+<h1>Index</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ItemName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.StyleType)
             </th>
@@ -28,24 +22,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.LifeType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductType)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                <img src="@Url.Content(item.ItemImage)" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StyleType)
             </td>
@@ -56,10 +38,9 @@
                 @Html.DisplayFor(modelItem => item.LifeType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductType)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ItemId">Details</a>
+                <a asp-action="Edit" asp-route-id="@item.SurveyId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SurveyId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SurveyId">Delete</a>
             </td>
         </tr>
 }

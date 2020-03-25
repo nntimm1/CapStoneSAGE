@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SAGEWebsite.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingAddressId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippingOption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingAddressId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingOption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.ItemId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.CustomerId)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.OrderNumber">Details</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

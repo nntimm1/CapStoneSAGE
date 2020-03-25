@@ -60,7 +60,7 @@ namespace SAGEWebsite.Controllers
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber");
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
             ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId");
-            ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "ID", "ID");
+            ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "CustomerId", "CustomerId");
             return View();
         }
 
@@ -91,16 +91,20 @@ namespace SAGEWebsite.Controllers
         // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
+            var customer = _context.Customers
+                .Include(c => c.BillingAddress)
+                .Include(c => c.Payment)
+                .Include(c => c.ShippingAddress)
+                .Include(c => c.Survey)
+                .Where(m => m.IdentityUserId == userId).FirstOrDefault();
+
+
             ViewData["BillingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.BillingAddressId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber", customer.PaymentId);
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.ShippingAddressId);
@@ -113,7 +117,7 @@ namespace SAGEWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,FirstName,LastName,EmailAddress,EmailOptIn,PaymentId,SurveyId,ShippingAddressId,BillingAddressId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
             if (id != customer.CustomerId)
             {

@@ -1,0 +1,41 @@
+﻿@model SAGEWebsite.Models.Survey
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Survey</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StyleType" class="control-label"></label>
+                <input asp-for="StyleType" class="form-control" />
+                <span asp-validation-for="StyleType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomeType" class="control-label"></label>
+                <input asp-for="HomeType" class="form-control" />
+                <span asp-validation-for="HomeType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LifeType" class="control-label"></label>
+                <input asp-for="LifeType" class="form-control" />
+                <span asp-validation-for="LifeType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
