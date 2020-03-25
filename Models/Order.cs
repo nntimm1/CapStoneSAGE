@@ -11,8 +11,10 @@ namespace SAGEWebsite.Models
     {
         [Key]
         public int OrderNumber { get; set; }
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
         public int ShippingAddressId { get; set; }
+        [Display(Name = "Shiping Method")]
         public string ShippingOption { get; set; }
 
         [Display(Name = "Order Line")]

@@ -5,9 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Plant Profile</h1>
 
-<h4>Survey</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,18 +14,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="StyleType" class="control-label"></label>
-                <input asp-for="StyleType" class="form-control" />
-                <span asp-validation-for="StyleType" class="text-danger"></span>
+                <select asp-for="StyleType" class="form control">
+                    <option value="Modern">Modern</option>
+                    <option value="Country">Country</option>
+                    <option value="Eclectic">Eclectic</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="HomeType" class="control-label"></label>
-                <input asp-for="HomeType" class="form-control" />
-                <span asp-validation-for="HomeType" class="text-danger"></span>
+                <select asp-for="HomeType" class="form control">
+                    <option value="Bright">Bright As The Sun</option>
+                    <option value="Normal">Well Lit</option>
+                    <option value="Dark">Dark As A Cave</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="LifeType" class="control-label"></label>
-                <input asp-for="LifeType" class="form-control" />
-                <span asp-validation-for="LifeType" class="text-danger"></span>
+                <select asp-for="LifeType" class="form control">
+                    <option value="Homebody">Homebody</option>
+                    <option value="Average">Out For A Day Or Two</option>
+                    <option value="Active">Gone For Days At A Time</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

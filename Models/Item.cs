@@ -10,7 +10,7 @@ namespace SAGEWebsite.Models
     {
         [Key]
         public int ItemId { get; set; }
-        [Display(Name = "Name")]
+        [Display(Name = "Item Name")]
         public string ItemName { get; set; }
         public string ItemImage { get; set; }
         [Display(Name = "Price")]

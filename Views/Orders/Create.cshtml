@@ -6,9 +6,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>New Order</h1>
 
-<h4>Order</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,22 +25,20 @@
                 <span asp-validation-for="OrderDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ShippingAddressId" class="control-label"></label>
-                <input asp-for="ShippingAddressId" class="form-control" />
-                <span asp-validation-for="ShippingAddressId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ShippingOption" class="control-label"></label>
-                <input asp-for="ShippingOption" class="form-control" />
-                <span asp-validation-for="ShippingOption" class="text-danger"></span>
+                <select asp-for="ShippingOption" class="control-label">
+                    <option value="7-10 Day">7-10 Day Free</option>
+                    <option value="2-3 Day">2-5 Day $10.99</option>
+                    <option value="Overnight">Overnight 14.99</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="ItemId" class="control-label"></label>
-                <select asp-for="ItemId" class="form-control" asp-items="ViewBag.ItemId"></select>
+                <label asp-for="Item.ItemName" class="control-label"></label>
+                <input asp-for="Item.ItemName" class="form-control" asp-items="ViewBag.ItemId">
             </div>
             <div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                <label asp-for="Item.UnitPrice" class="control-label"></label>
+                <input asp-for="Item.UnitPrice" class="form-control" asp-items="ViewBag.ItemId">
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -49,81 +47,110 @@
     </div>
 </div>
 <div>
-    <h3>Shipping Address</h3>
+    <h3>Customer Information</h3>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.Address1)
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Customer.ShippingAddress.Address1)
+            @Html.DisplayFor(model => model.Customer.FirstName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.StreetAddress2)
+            @Html.DisplayNameFor(model => model.Customer.LastName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Customer.ShippingAddress.StreetAddress2)
+            @Html.DisplayFor(model => model.Customer.LastName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.City)
+            @Html.DisplayNameFor(model => model.Customer.Payment.CreditCardNumber)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Customer.ShippingAddress.City)
+            @Html.DisplayFor(model => model.Customer.Payment.CreditCardNumber)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.State)
+            @Html.DisplayNameFor(model => model.Customer.EmailAddress)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Customer.ShippingAddress.State)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.ZipCode)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Customer.ShippingAddress.ZipCode)
+            @Html.DisplayFor(model => model.Customer.EmailAddress)
         </dd>
     </dl>
-
     <div>
-        <h3>Billing Address</h3>
+        <h3>Shipping Address</h3>
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Customer.BillingAddress.Address1)
+                @Html.DisplayNameFor(model => model.Customer.ShippingAddress.Address1)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Customer.BillingAddress.Address1)
+                @Html.DisplayFor(model => model.Customer.ShippingAddress.Address1)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Customer.BillingAddress.StreetAddress2)
+                @Html.DisplayNameFor(model => model.Customer.ShippingAddress.StreetAddress2)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Customer.BillingAddress.StreetAddress2)
+                @Html.DisplayFor(model => model.Customer.ShippingAddress.StreetAddress2)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Customer.BillingAddress.City)
+                @Html.DisplayNameFor(model => model.Customer.ShippingAddress.City)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Customer.BillingAddress.City)
+                @Html.DisplayFor(model => model.Customer.ShippingAddress.City)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Customer.BillingAddress.State)
+                @Html.DisplayNameFor(model => model.Customer.ShippingAddress.State)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Customer.BillingAddress.State)
+                @Html.DisplayFor(model => model.Customer.ShippingAddress.State)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Customer.BillingAddress.ZipCode)
+                @Html.DisplayNameFor(model => model.Customer.ShippingAddress.ZipCode)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Customer.BillingAddress.ZipCode)
+                @Html.DisplayFor(model => model.Customer.ShippingAddress.ZipCode)
             </dd>
-
         </dl>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div>
+            <h3>Billing Address</h3>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Customer.BillingAddress.Address1)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Customer.BillingAddress.Address1)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Customer.BillingAddress.StreetAddress2)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Customer.BillingAddress.StreetAddress2)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Customer.BillingAddress.City)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Customer.BillingAddress.City)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Customer.BillingAddress.State)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Customer.BillingAddress.State)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Customer.BillingAddress.ZipCode)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Customer.BillingAddress.ZipCode)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 

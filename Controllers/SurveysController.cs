@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,30 +22,50 @@ namespace SAGEWebsite.Models
         // GET: Surveys
         public async Task<IActionResult> Index()
         {
+            var applicationDbContext = _context.Items.Include(o => o.ItemName).Include(s => s.ItemImage).Include(s => s.UnitPrice).Include(s => s.StyleType)
+                .Include(s => s.HomeType).Include(s => s.LifeType);
             return View(await _context.Surveys.ToListAsync());
         }
 
         // GET: Surveys/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
+            var applicationDbContext = _context.Items.Include(o => o.ItemName).Include(s => s.ItemImage).Include(s => s.UnitPrice).Include(s => s.StyleType)
+            .Include(s => s.HomeType).Include(s => s.LifeType);
+            Item item = new Item();
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers
+                .Include(c => c.Survey)
+                .Where(m => m.IdentityUserId == userId).FirstOrDefault();
+            if (userId == null)
             {
                 return NotFound();
             }
 
-            var survey = await _context.Surveys
-                .FirstOrDefaultAsync(m => m.SurveyId == id);
+            var survey = await _context.Customers
+                .Include(c => c.CustomerId)
+                .Include(s => s.SurveyId)
+                .FirstOrDefaultAsync(m => m.SurveyId == customer.CustomerId);
             if (survey == null)
             {
                 return NotFound();
             }
 
-            return View(survey);
+            return View("Details",survey);
         }
 
         // GET: Surveys/Create
         public IActionResult Create()
         {
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers
+                .Where(c => c.IdentityUserId == userId)
+                .Include(a => a.BillingAddress)
+                .Include(s => s.ShippingAddress)
+                .Include(p => p.Payment)
+                .FirstOrDefault();
             return View();
         }
 
@@ -59,7 +80,7 @@ namespace SAGEWebsite.Models
             {
                 _context.Add(survey);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View("Details",survey);
             }
             return View(survey);
         }

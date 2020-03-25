@@ -46,18 +46,27 @@ namespace SAGEWebsite.Models
             return View(order);
         }
         // GET: Orders/Create
-        public IActionResult Create(Customer customer)
+        public IActionResult Create()
 
         {
+            Order order = new Order();
+            Item item = new Item();
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            customer.IdentityUserId = userId;
+            var customer = _context.Customers
+                .Where(c => c.IdentityUserId == userId)
+                .Include(a => a.BillingAddress)
+                .Include(s => s.ShippingAddress)
+                .Include(p => p.Payment)
+                .FirstOrDefault();
+            order.Customer = customer;
 
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
             ViewData["ItemId"] = new SelectList(_context.Items, "ItemId", "ItemId");
             ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "CustomerId", "CustomerId");
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber");
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
-            return View();
+            return View(order);
         }
 
         // POST: Orders/Create
