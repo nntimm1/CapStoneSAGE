@@ -1,96 +1,83 @@
-﻿@model SAGEWebsite.Models.Survey
+﻿@model SAGEWebsite.Models.SurveyItems
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
 
 <div>
-    <h4>Survey</h4>
+    <h2>Your Questionnaire Answers</h2>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StyleType)
+            @Html.DisplayNameFor(model => model.Survey.StyleType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StyleType)
+            @Html.DisplayFor(model => model.Survey.StyleType)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.HomeType)
+            @Html.DisplayNameFor(model => model.Survey.HomeType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.HomeType)
+            @Html.DisplayFor(model => model.Survey.HomeType)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LifeType)
+            @Html.DisplayNameFor(model => model.Survey.LifeType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LifeType)
+            @Html.DisplayFor(model => model.Survey.LifeType)
         </dd>
     </dl>
 </div>
 <div>
-    @*<h4>Item</h4>
+    <h2>These are the plants that may work for you and your life.</h2>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ItemName)
+            @Html.DisplayNameFor(model => model.Item.ItemName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ItemName)
+            @Html.DisplayFor(model => model.Item.ItemName)
         </dd>
-        <dt class="col-sm-2">
+        @*<dt class="col-sm-2">
 
+        </dt>*@
+        @*<dd class="col-sm-10">
+            <img src="@Url.Content(Model.Item.ItemImage)" />
+        </dd>*@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.UnitPrice)
         </dt>
         <dd class="col-sm-10">
-            <img src="@Url.Content(Model.ItemImage)" />
+            @Html.DisplayFor(model => model.Item.UnitPrice)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UnitPrice)
+            @Html.DisplayNameFor(model => model.Item.StyleType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UnitPrice)
+            @Html.DisplayFor(model => model.Item.StyleType)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StyleType)
+            @Html.DisplayNameFor(model => model.Item.HomeType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StyleType)
+            @Html.DisplayFor(model => model.Item.HomeType)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.HomeType)
+            @Html.DisplayNameFor(model => model.Item.LifeType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.HomeType)
+            @Html.DisplayFor(model => model.Item.LifeType)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LifeType)
+            @Html.DisplayNameFor(model => model.Item.ProductType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LifeType)
+            @Html.DisplayFor(model => model.Item.ProductType)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProductType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AutoReorder)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AutoReorder)
-        </dd>
+        <a id="btn_add" href="@Url.Action("Index", "Items")" class="btn btn-info btn-lg" style="margin-left:60px">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Product List
+        </a>
     </dl>
-</div>*@
-<div>
-
-    <a id="btn_add" href="@Url.Action("Create", "Orders")" class="btn btn-info btn-lg" style="margin-left:60px">
-        <span class="glyphicon glyphicon-shopping-cart"></span> Add To Order
-    </a>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.SurveyId">Edit</a>
 </div>

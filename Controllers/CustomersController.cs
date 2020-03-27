@@ -24,7 +24,11 @@ namespace SAGEWebsite.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.BillingAddress).Include(c => c.Payment).Include(c => c.ShippingAddress).Include(c => c.Survey);
+            var applicationDbContext = _context.Customers
+                .Include(c => c.BillingAddress)
+                .Include(c => c.Payment)
+                .Include(c => c.ShippingAddress)
+                .Include(c => c.Survey);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -150,7 +154,6 @@ namespace SAGEWebsite.Controllers
             ViewData["BillingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.BillingAddressId);
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber", customer.PaymentId);
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.ShippingAddressId);
-            ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId", customer.SurveyId);
             ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "CustomerId", "CustomerId");
             return View("Details",customer);
         }
