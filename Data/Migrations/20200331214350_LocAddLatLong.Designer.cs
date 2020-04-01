@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SAGEWebsite.Data;
 
 namespace SAGEWebsite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200331214350_LocAddLatLong")]
+    partial class LocAddLatLong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,8 +50,8 @@ namespace SAGEWebsite.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "00ccafcb-e5de-44c9-b410-ce410ef4d898",
-                            ConcurrencyStamp = "dc032171-fbf0-4c9f-a4b0-da999381bc30",
+                            Id = "afb9d66d-5e35-43a7-b114-12471700eaa4",
+                            ConcurrencyStamp = "d610f5df-fdc4-421b-a39d-7240f995e183",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -386,13 +388,10 @@ namespace SAGEWebsite.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Lat")
+                    b.Property<double>("Lat")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Lng")
+                    b.Property<double>("Lng")
                         .HasColumnType("float");
 
                     b.Property<string>("LocationAddress")
@@ -408,15 +407,6 @@ namespace SAGEWebsite.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocationName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Zip")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LocationId");

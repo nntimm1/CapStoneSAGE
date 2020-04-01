@@ -61,7 +61,7 @@
 </div>
 <div>
 
-    <a id="btn_add" href="@Url.Action("Create", "Orders")" class="btn btn-info btn-lg" style="margin-left:60px">
+    <a id="btn_add" href="@Url.Action("Create","Orders", new { id = Model.ItemId })" class="btn btn-info btn-lg" style="margin-left:60px">
         <span class="glyphicon glyphicon-shopping-cart"></span> Add To Order
     </a>
 

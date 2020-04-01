@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SAGEWebsite.Data;
 using SAGEWebsite.Models;
+using System.Configuration;
+using NLog.Internal;
 
 namespace SAGEWebsite.Controllers
 {
@@ -28,6 +31,7 @@ namespace SAGEWebsite.Controllers
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.mymap = "https://maps.googleapis.com/maps/api/js?key=" + APIs.Keys.mapsKey + "&callback=initMap";
             if (id == null)
             {
                 return NotFound();

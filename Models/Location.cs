@@ -16,11 +16,17 @@ namespace SAGEWebsite.Models
 
         public string LocationAddress { get; set; }
         [Display(Name = "Hours")]
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
         public string LocationHours { get; set; }
         [Display(Name = "Location Map")]
         public string LocationMap { get; set; }
         [Display(Name = "Directions")]
         public string LocationDirections { get; set; }
+        public double? Lat { get; set; }
+        public double? Lng { get; set; }
 
     }
 }

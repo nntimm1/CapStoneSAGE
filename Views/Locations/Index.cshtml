@@ -16,9 +16,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.LocationHours)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationMap)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,9 +28,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LocationHours)
-            </td>
-            <td>
-                <img src="@Url.Content(item.LocationMap)" />
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.LocationId">Details</a>

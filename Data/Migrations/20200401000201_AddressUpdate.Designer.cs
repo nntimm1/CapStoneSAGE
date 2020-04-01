@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SAGEWebsite.Data;
 
 namespace SAGEWebsite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200401000201_AddressUpdate")]
+    partial class AddressUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,8 +50,8 @@ namespace SAGEWebsite.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "00ccafcb-e5de-44c9-b410-ce410ef4d898",
-                            ConcurrencyStamp = "dc032171-fbf0-4c9f-a4b0-da999381bc30",
+                            Id = "31807bd8-43e3-4496-b9a4-3e70505f87de",
+                            ConcurrencyStamp = "ee5d044e-3696-448f-9c44-7660de6d176b",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -389,10 +391,10 @@ namespace SAGEWebsite.Data.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Lat")
+                    b.Property<double>("Lat")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Lng")
+                    b.Property<double>("Lng")
                         .HasColumnType("float");
 
                     b.Property<string>("LocationAddress")

@@ -46,11 +46,13 @@ namespace SAGEWebsite.Models
             return View(order);
         }
         // GET: Orders/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
 
         {
             Order order = new Order();
             Item item = new Item();
+
+            var plant = _context.Items.Where(p => p.ItemId == id);
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers
@@ -74,7 +76,7 @@ namespace SAGEWebsite.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Order order,Customer customer)
+        public async Task<IActionResult> Create(Order order,Customer customer,Item item)
         {
             if (ModelState.IsValid)
 

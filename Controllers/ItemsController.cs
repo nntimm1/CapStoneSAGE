@@ -54,7 +54,7 @@ namespace SAGEWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,ItemName,UnitPrice,StyleType,HomeType,LifeType,ProductType,AutoReorder")] Item item)
+        public async Task<IActionResult> Create([Bind("ItemName,UnitPrice")] Item item)
         {
             if (ModelState.IsValid)
             {
