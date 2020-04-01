@@ -19,6 +19,8 @@ namespace SAGEWebsite.Models
 
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+        public double? Lat { get; set; }
+        public double? Lng { get; set; }
 
     }
 }

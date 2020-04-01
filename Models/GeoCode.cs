@@ -8,8 +8,6 @@ namespace SAGEWebsite.Models
     public class GeoCode
     {
 
-
-
             public Result[] results { get; set; }
             public string status { get; set; }
         

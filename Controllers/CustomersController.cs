@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using SAGEWebsite.Data;
 using SAGEWebsite.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace SAGEWebsite.Controllers
 {
@@ -79,9 +83,30 @@ namespace SAGEWebsite.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
+                HttpClient client = new HttpClient();
+
 
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
+                if (customer.ShippingAddress.Lat == null || customer.ShippingAddress.Lng == null)
+                {
+
+                    string location = customer.ShippingAddress.Address1 + "+" + customer.ShippingAddress.City + "+" + 
+                        customer.ShippingAddress.State + "+" + customer.ShippingAddress.ZipCode;
+                    string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + APIs.Keys.mapsKey;
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    string answer = await response.Content.ReadAsStringAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        GeoCode GeoResult = JsonConvert.DeserializeObject<GeoCode>(answer);
+                        var lat = GeoResult.results[0].geometry.location.lat;
+                        var lng = GeoResult.results[0].geometry.location.lng;
+                        customer.ShippingAddress.Lat = lat;
+                        customer.ShippingAddress.Lng = lng;
+                        _context.Update(customer.ShippingAddress);
+                    }
+                    await _context.SaveChangesAsync();
+                }
                 return View("Details",customer);
             }
             ViewData["BillingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId", customer.BillingAddressId);
