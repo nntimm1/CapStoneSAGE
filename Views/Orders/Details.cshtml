@@ -2,48 +2,69 @@
 
 @{
     ViewData["Title"] = "Details";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Thanks for your Order!</h1>
 
 <div>
-    <h4>Order</h4>
+    <h4>Order Details</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderNumber)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.OrderDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OrderDate)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ShippingAddressId)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.Address1)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ShippingAddressId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.ShippingAddress.Address1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.ShippingAddress.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.State)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.ShippingAddress.State)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.ShippingAddress.ZipCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.ShippingAddress.ZipCode)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ShippingOption)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ShippingOption)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Item)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.ItemName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Item.ItemId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.ItemName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.UnitPrice)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.CustomerId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.UnitPrice)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.OrderNumber">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

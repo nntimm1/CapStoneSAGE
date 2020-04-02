@@ -22,8 +22,6 @@ namespace SAGEWebsite.Models
         public string Zip { get; set; }
         public string LocationHours { get; set; }
         [Display(Name = "Location Map")]
-        public string LocationMap { get; set; }
-        [Display(Name = "Directions")]
         public string LocationDirections { get; set; }
         public double? Lat { get; set; }
         public double? Lng { get; set; }

@@ -6,7 +6,7 @@
 }
 
 <div>
-    <h4>Products of Sage are avaialble at these locations. <br />The deatils link will provide futher information about the location.</h4>
+    <h4>Products of Sage are avaialble at these locations. <br /></h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -28,12 +28,13 @@
             @Html.DisplayFor(model => model.LocationHours)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LocationMap)
+            Directions
         </dt>
-        <td>
-            <div id="map" style="height:500px; width:500px"></div>
-            <script>
-         function initMap() {
+    </dl>
+</div>
+<div id="map" style="height:500px; width:500px"></div>
+<script>
+         @*function initMap() {
             var myLatLng = { lat: @Model.Lat, lng: @Model.Lng };
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 19,
@@ -42,16 +43,64 @@
                var marker = new google.maps.Marker({
                position: myLatLng,
                map: map
-             });
+               });*@
+
+
+
+             function initMap() {
+            var pointA = new google.maps.LatLng(@Model.Lat, @Model.Lng),
+                pointB = new google.maps.LatLng(@ViewBag.CustomerLat, @ViewBag.CustomerLng),
+                myOptions = {
+                    zoom: 10,
+                    center: pointB
+                },
+               map = new google.maps.Map(document.getElementById('map'), myOptions),
+                // Instantiate a directions service.
+                directionsService = new google.maps.DirectionsService,
+                directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
+                }),
+                marker = new google.maps.Marker({
+                    position: pointA,
+                    //title: "point A",
+                    //label: "A",
+                    map: map
+                }),
+                marker = new google.maps.Marker({
+                    position: pointB,
+                    title: "Your Location",
+                    label: "Your Location",
+                    map: map
+                });
+            // get route from B to A
+            calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+        }
+            function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+                directionsService.route({
+                    origin: pointB,
+                    destination: pointA,
+                    avoidTolls: true,
+                    avoidHighways: false,
+                    travelMode: google.maps.TravelMode.DRIVING
+                }, function (response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                    } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+    }
+
+
+
+
+
         var geocoder = new google.maps.Geocoder();
 
         document.getElementById('submit').addEventListener('click', function() {
             geocodeAddress(geocoder, map);
-
-
-
         });
-      }
+      
 
       function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
@@ -67,19 +116,10 @@
           }
         });
       }
-            </script>
-            <script async defer
-                    src= @ViewBag.mymap>
-            </script>
-        </td>
-        <dt class="col-sm-2">
-            Directions
-        </dt>
-        <td>
-            <a target="_blank" href="@Url.Content(Model.LocationDirections)">Click for Directions</a>
-        </td>
-    </dl>
-</div>
+</script>
+<script async defer
+        src=@ViewBag.mymap>
+</script>
 <div>
     <a asp-action="Index">Back to Locations</a>
 </div>

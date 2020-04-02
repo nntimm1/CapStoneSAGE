@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SAGEWebsite.Data;
 
-namespace SAGEWebsite.Data.Migrations
+namespace SAGEWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200401020240_GeoCode")]
-    partial class GeoCode
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,8 +48,8 @@ namespace SAGEWebsite.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d2c4d16c-2876-4cbd-880c-5290f5d40641",
-                            ConcurrencyStamp = "22a8091f-0386-4d52-ae9e-9329392d1f50",
+                            Id = "b50f876a-20cc-43af-a160-cfe55773aa9c",
+                            ConcurrencyStamp = "2f2208c8-eef0-47e1-b314-2c3b2419e2a7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -242,6 +240,12 @@ namespace SAGEWebsite.Data.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<double?>("Lat")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Lng")
+                        .HasColumnType("float");
+
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
@@ -314,8 +318,8 @@ namespace SAGEWebsite.Data.Migrations
                     b.Property<int?>("OrderNumber")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("PaymentId")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<int>("PaymentId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ShippingAddressId")
                         .HasColumnType("int");
@@ -391,10 +395,10 @@ namespace SAGEWebsite.Data.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Lat")
+                    b.Property<double?>("Lat")
                         .HasColumnType("float");
 
-                    b.Property<double>("Lng")
+                    b.Property<double?>("Lng")
                         .HasColumnType("float");
 
                     b.Property<string>("LocationAddress")
@@ -404,9 +408,6 @@ namespace SAGEWebsite.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocationHours")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationMap")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocationName")
@@ -433,10 +434,10 @@ namespace SAGEWebsite.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
@@ -459,12 +460,16 @@ namespace SAGEWebsite.Data.Migrations
 
             modelBuilder.Entity("SAGEWebsite.Models.Payment", b =>
                 {
-                    b.Property<decimal>("CreditCardNumber")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CVVSecurityCode")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("CreditCardNumber")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
@@ -478,7 +483,7 @@ namespace SAGEWebsite.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CreditCardNumber");
+                    b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
@@ -585,7 +590,9 @@ namespace SAGEWebsite.Data.Migrations
 
                     b.HasOne("SAGEWebsite.Models.Payment", "Payment")
                         .WithMany()
-                        .HasForeignKey("PaymentId");
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SAGEWebsite.Models.Address", "ShippingAddress")
                         .WithMany()
@@ -607,11 +614,15 @@ namespace SAGEWebsite.Data.Migrations
                 {
                     b.HasOne("SAGEWebsite.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SAGEWebsite.Models.Item", "Item")
                         .WithMany()
-                        .HasForeignKey("ItemId");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SAGEWebsite.Models.Payment", b =>

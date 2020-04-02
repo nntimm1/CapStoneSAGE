@@ -10,6 +10,7 @@ using SAGEWebsite.Data;
 using SAGEWebsite.Models;
 using System.Configuration;
 using NLog.Internal;
+using System.Security.Claims;
 
 namespace SAGEWebsite.Controllers
 {
@@ -32,6 +33,13 @@ namespace SAGEWebsite.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             ViewBag.mymap = "https://maps.googleapis.com/maps/api/js?key=" + APIs.Keys.mapsKey + "&callback=initMap";
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Include(c => c.ShippingAddress)
+                .Where(c => c.IdentityUserId == userId)
+                .Select(c => c.ShippingAddress).SingleOrDefault();
+            ViewBag.CustomerLat = customer.Lat;
+            ViewBag.CustomerLng = customer.Lng;
+
             if (id == null)
             {
                 return NotFound();

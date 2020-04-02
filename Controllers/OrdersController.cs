@@ -35,8 +35,9 @@ namespace SAGEWebsite.Models
             }
 
             var order = await _context.Orders
-                .Include(o => o.Customer)
-                .Include(o => o.Item)
+                .Include(o => o.CustomerId)
+                .Include(o => o.ShippingAddressId)
+                .Include(o => o.ItemId)
                 .FirstOrDefaultAsync(m => m.OrderNumber == id);
             if (order == null)
             {
@@ -50,24 +51,29 @@ namespace SAGEWebsite.Models
 
         {
             Order order = new Order();
-            Item item = new Item();
+            var item = id;
 
-            var plant = _context.Items.Where(p => p.ItemId == id);
+            var plant = _context.Items.Where(p => p.ItemId == id).SingleOrDefault();
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers
                 .Where(c => c.IdentityUserId == userId)
-                .Include(a => a.BillingAddress)
-                .Include(s => s.ShippingAddress)
-                .Include(p => p.Payment)
+                .Include(c => c.BillingAddress)
+                .Include(c => c.ShippingAddress)
+                .Include(c => c.Payment)
                 .FirstOrDefault();
-            order.Customer = customer;
+            order.Customer = customer;  
+            order.ItemId = plant.ItemId;
+            order.CustomerId = customer.CustomerId;
+            order.ShippingAddressId = customer.ShippingAddress.AddressId;
+
 
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
-            ViewData["ItemId"] = new SelectList(_context.Items, "ItemId", "ItemId");
             ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "CustomerId", "CustomerId");
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber");
-            ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
+            ViewBag.ItemName = plant.ItemName;
+            ViewBag.ItemPrice = plant.UnitPrice;
+
             return View(order);
         }
 
@@ -76,25 +82,26 @@ namespace SAGEWebsite.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Order order,Customer customer,Item item)
+        public async Task<IActionResult> Create(Order order)
         {
+            order.Customer = null;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).Include(c => c.ShippingAddress).FirstOrDefault();
+            order.ShippingAddressId = _context.Addresses.Where(c => c.AddressId == customer.ShippingAddress.AddressId).SingleOrDefault().AddressId;
+            order.Item = _context.Items.Where(i => i.ItemId == order.ItemId).SingleOrDefault();
             if (ModelState.IsValid)
 
-            {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                customer.IdentityUserId = userId;
-                
-
+            {               
                 _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Create));
+                return View("Details",order);
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
             ViewData["ItemId"] = new SelectList(_context.Items, "ItemId", "ItemId");
             ViewData["IdentityUserId"] = new SelectList(_context.Set<Customer>(), "CustomerId", "CustomerId");
             ViewData["PaymentId"] = new SelectList(_context.Payments, "CreditCardNumber", "CreditCardNumber");
             ViewData["ShippingAddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressId");
-            return View(order);
+            return View("Details", order);
         }
 
         // GET: Orders/Edit/5

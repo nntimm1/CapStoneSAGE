@@ -9,8 +9,9 @@ namespace SAGEWebsite.Models
     public class Payment
     {
         [Key]
+        public int Id { get; set; }
         [Display(Name = "Credit Card Number")]
-        public ulong? CreditCardNumber { get; set; }
+        public decimal CreditCardNumber { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]

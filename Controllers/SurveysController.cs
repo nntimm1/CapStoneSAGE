@@ -45,7 +45,7 @@ namespace SAGEWebsite.Models
 
             var item = _context.Items.Where(h => h.StyleType == si.Survey.StyleType).Where(h => h.HomeType == si.Survey.HomeType).Where(h => h.LifeType == si.Survey.LifeType).FirstOrDefault();
 
-            var custItems = _context.Items.FirstOrDefault(j => j.ItemId == item.ItemId);
+            var custItems = _context.Items.SingleOrDefault(j => j.ItemId == item.ItemId);
             si.Item = custItems;
             
             if (custSurvey == null)

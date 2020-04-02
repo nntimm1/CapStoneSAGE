@@ -85,7 +85,6 @@ namespace SAGEWebsite.Controllers
                 customer.IdentityUserId = userId;
                 HttpClient client = new HttpClient();
 
-
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 if (customer.ShippingAddress.Lat == null || customer.ShippingAddress.Lng == null)

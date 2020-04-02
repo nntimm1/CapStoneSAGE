@@ -24,7 +24,7 @@ namespace SAGEWebsite.Models
         [Display(Name = "Payment Method")]
         [ForeignKey("Payment")]
 
-        public ulong? PaymentId { get; set; }
+        public int PaymentId { get; set; }
         public Payment Payment { get; set; }
 
         public IEnumerable<Payment> Payments { get; set; }
